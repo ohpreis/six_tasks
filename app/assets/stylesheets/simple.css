@@ -27,7 +27,7 @@
   /* Default (light) theme */
   --bg: #fff;
   --accent-bg: #f5f7ff;
-  --alert-bg: #ffeb3b;
+  --alert-bg: #d81b60;
   --text: #212121;
   --text-light: #585858;
   --border: #898EA4;
@@ -47,7 +47,7 @@
     color-scheme: dark;
     --bg: #212121;
     --accent-bg: #2b2b2b;
-    --alert-bg: #ffeb3b;
+    --alert-bg: #d81b60;
     --text: #dcdcdc;
     --text-light: #ababab;
     --accent: #ffb300;
@@ -731,6 +731,7 @@ sub {
 /* Classes for alerts */
 .alarm {
   background: var(--alert-bg);
+  color: var(--accent-text);
   border: 2px solid var(--border);
   border-radius: var(--standard-border-radius);
   padding: 1.5rem;
