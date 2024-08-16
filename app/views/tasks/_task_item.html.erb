@@ -1,5 +1,14 @@
 <div id="<%= dom_id task %>">
     <p>
-      <%= link_to task.title, edit_task_path(task) %>
+      <% maxLength = 40 %>
+      <% ellipsis = '...' %>
+      <%# Next in Line %>
+      <a data-id="<%= task.id %>" href="<%= edit_task_path(task) %>">
+        <% title_lines = task.title.split("\n") %>
+        <% first_line = title_lines[0] %>
+        <% truncated_line = first_line.length > maxLength ? first_line.truncate(maxLength, separator: ' ') : first_line %>
+        <%= truncated_line %>
+        <%= ' _' if title_lines.length > 1 %>
+      </a>
     </p>  
 </div>

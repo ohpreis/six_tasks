@@ -1,0 +1,9 @@
+<h2>Completed</h2>
+
+<% if @completed_tasks.present? %>
+    <% @completed_tasks.each do |completed| %>
+        <%= render "tasks/task_item", task: completed %>
+    <% end %>
+<% else %>
+        <p>Nothing yet.</p>
+<% end %>

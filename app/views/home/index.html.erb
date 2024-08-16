@@ -3,7 +3,8 @@
     <%= form.text_field :title %>
     <%= form.submit %>
     <% end %>
-    <article>
+    <fieldset>
+        <legend>Doing</legend>
         <% if @doing.present? %>
             <% @doing.each do |doing| %>
                 <%= render "tasks/task_item", task: doing %>
@@ -12,9 +13,10 @@
                 <p>Nothing yet.</p>
         <% end %>
         
-    </article>
+    </fieldset>
 
-    <article>
+    <fieldset>
+        <legend>Backlog</legend>
         <% if @backlog.present? %>
             <% @backlog.each do |backlog| %>
                 <%= render "tasks/task_item", task: backlog %>
@@ -22,9 +24,10 @@
         <% else %>
                 <p>There Backlog is empty! What?</p>
         <% end %>
-    </article>
+    </fieldset>
     
-    <article>
+    <fieldset>
+        <legend>Ideas</legend>
         <% if @ideas.present? %>
             <% @ideas.each do |idea| %>
                 <%= render "tasks/task_item", task: idea %>
@@ -32,7 +35,9 @@
         <% else %>
                 <p>No Ideas?</p>
         <% end %>
-    </article>
+    </fieldset>
+
+    <p><%= link_to 'Done Tasks', completed_path %></p>
 
 <% else %>
   <p>Hi, to continue please 

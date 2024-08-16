@@ -25,11 +25,14 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
 
+    # check if the task is an idea or doing
+    if @task.title.nil?
     isA = @task.title.split.last.delete(".!?,")
     if isA == "@doing" || isA == "@idea"
       @task.status = isA[1..-1]
       # remove the isA from the string
       @task.title = @task.title[0..-isA.length-1]
+    end
     end
 
     respond_to do |format|
