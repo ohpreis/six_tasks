@@ -28,6 +28,7 @@
   --bg: #fff;
   --accent-bg: #f5f7ff;
   --alert-bg: #d81b60;
+  --alert-bg-hover: #ff3366;
   --text: #212121;
   --text-light: #585858;
   --border: #898EA4;
@@ -164,7 +165,7 @@ h6 {
 }
 
 p {
-  margin: 1.5rem 0;
+  margin: 0.5rem 0;
 }
 
 /* Prevent long strings from overflowing container */
@@ -736,4 +737,14 @@ sub {
   border-radius: var(--standard-border-radius);
   padding: 1.5rem;
   margin: 2rem 0;
+}
+.warning-button {
+  background: var(--alert-bg);
+  color: var(--accent-text);
+  /* border: 2px solid var(--border); */
+  border-radius: var(--standard-border-radius);
+  padding: 0.5rem 1rem;
+}
+.warning-button:hover {
+  background: var(--alert-bg-hover);
 }

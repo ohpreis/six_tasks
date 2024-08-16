@@ -18,7 +18,14 @@
 /* Global variables. */
 
 
-
+.status-list {
+  margin-top: 1rem;
+  list-style: none;
+  padding: 0;
+}
+.status-list li {
+  display: inline-block
+}
 nav ul {
   margin-top: 1rem;
   list-style: none;

@@ -1,0 +1,38 @@
+<%= form_with(model: task) do |form| %>
+  <% if task.errors.any? %>
+    <div style="color: red">
+      <h5><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h5>
+
+      <ul>
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_area :title %>
+  </div>
+
+  <div>
+    <ul class="status-list">
+      <% Task.statuses.each do |key, value| %>
+        <li>
+          <% id = "task_status_#{key}" %>
+          <%= form.radio_button :status, key, id: id, checked: (form.object.status == key) %>
+          <%= form.label :status, key.humanize, for: id %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div>
+    <%= form.submit %>  
+  </div>
+<% end %>
+<%= button_to "Destroy this task", @task, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "warning-button" %>
