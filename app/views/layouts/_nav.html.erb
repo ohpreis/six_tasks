@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
   <ul>
     <li><a href="/">Home</a></li>
     <% if user_signed_in? %>
@@ -10,4 +10,33 @@
     <% end %>
   </ul>    
 
-</nav>    
+</nav>     -->
+
+
+<nav class="desktop-menu">
+  <a href="/">Home</a>
+  <% if user_signed_in? %>
+      <%= link_to 'Morning Page', morning_pages_path %>
+      <%= link_to 'My Profile', edit_user_registration_path %>
+      <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "btn-link") %>
+  <% else %>
+      <%= link_to 'Login', new_user_session_path %>
+      <%= link_to 'Register', new_user_registration_path %>
+  <% end %>
+</nav>
+
+<nav class="mobile-menu">
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+  <div class="menu-items">
+    <a href="/">Home</a>
+    <% if user_signed_in? %>
+        <%= link_to 'Morning Page', morning_pages_path %>
+        <%= link_to 'My Profile', edit_user_registration_path, class: "has_bottom_border" %>
+        <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "btn-link") %>
+    <% else %>
+        <%= link_to 'Login', new_user_session_path %>
+        <%= link_to 'Register', new_user_registration_path %>
+    <% end %>
+  </div>
+</nav>

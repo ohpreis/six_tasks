@@ -1,0 +1,2 @@
+module MorningPagesHelper
+end

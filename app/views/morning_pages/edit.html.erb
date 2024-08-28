@@ -1,0 +1,12 @@
+<% content_for :title, "Editing morning page" %>
+
+<h1>Editing morning page</h1>
+
+<%= render "form", morning_page: @morning_page %>
+
+<br>
+
+<div>
+  <%= link_to "Show this morning page", @morning_page %> |
+  <%= link_to "Back to morning pages", morning_pages_path %>
+</div>

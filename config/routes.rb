@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :tasks
+  resources :morning_pages
+  resources :tasks do
+    member do
+      get :change_status
+    end
+  end
   devise_for :users
   get "home/index"
   get "completed" => "home#completed"

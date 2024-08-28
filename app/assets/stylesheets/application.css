@@ -26,25 +26,105 @@
 .status-list li {
   display: inline-block
 }
-nav ul {
-  margin-top: 1rem;
-  list-style: none;
-  padding: 0;
-}
-nav ul li {
-  margin-right: 1rem;
-  display: inline-block
+
+
+
+
+
+  /* Basic styling for desktop menu */
+  .desktop-menu {
+    display: flex;
+    padding-top: 10px;
+  }
+
+  .desktop-menu a {
+    text-decoration: none;
+    padding: 10px;
+  }
+
+  .desktop-menu a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hide mobile menu by default */
+  .mobile-menu {
+    display: none;
+  }
+
+  /* Media query to hide desktop menu and show mobile menu on smaller screens */
+  @media screen and (max-width: 600px) {
+    .desktop-menu {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: block;
+      /* padding: 10px; */
+    }
+
+    .menu-icon {
+      font-size: 30px;
+      cursor: pointer;
+      display: block;
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .menu-items {
+      display: none;
+      flex-direction: column;
+    }
+
+    #menu-toggle:checked + .menu-icon + .menu-items {
+      display: flex;
+    }
+
+    .mobile-menu a {
+
+      text-decoration: none;
+      padding: 10px;
+      border-top: 1px solid #444;
+    }
+
+    .mobile-menu a:hover {
+      color: #444;
+    }
+    
+  }
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .mobile-menu .has_bottom_border {
+    border-bottom: 1px solid #444 !important;
+  }
 }
 
+
+
+
+
 .btn-link {
+  background-color: white !important;
+  color: var(--accent);
+  padding-top: .7rem;
+  color: var(--accent);
+  border: none
+}
+
+/* .btn-link {
   display: inline-block;
   padding: 0;
   border: none;
   background: none;
   color: var(--accent);
   text-decoration: underline;
-}
+} */
 .btn-link:hover {
   background-color: white !important;
-  text-decoration: none;
+  text-decoration: underline;
+}
+.smaller {
+  font-size: 0.9rem;
 }

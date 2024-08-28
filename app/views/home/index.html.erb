@@ -1,6 +1,6 @@
 <% if current_user.present? %>
     <%= form_with model: @task do |form| %>
-    <%= form.text_field :title %>
+        <%= form.text_field :title, size: "40" %>
     <%= form.submit %>
     <% end %>
     <fieldset>

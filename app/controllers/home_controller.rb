@@ -12,4 +12,15 @@ class HomeController < ApplicationController
 
   def help
   end
+
+  private
+
+  def set_morning_page
+    today = Date.current
+    if MorningPage.exists?(created_at: today.midnight..today.end_of_day)
+      @morning_page = MorningPage.find_by(created_at: today.midnight..today.end_of_day).first
+    else
+      @morning_page = MorningPage.create!(created_at: today, user: current_user, body: "get started")
+    end
+  end
 end

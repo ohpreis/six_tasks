@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ show edit update destroy change_status ]
 
   # GET /tasks or /tasks.json
   def index
@@ -18,6 +18,15 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+  end
+
+  def change_status
+    if Task.statuses.keys.include?(params[:status])
+      @task.update(status: params[:status])
+      redirect_to home_index_path, notice: "Task status was successfully updated."
+    else
+      redirect_to home_index_path, alert: "Invalid status."
+    end
   end
 
   # POST /tasks or /tasks.json
