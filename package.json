@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "build:css": "postcss app/assets/scss/application.scss -o app/assets/stylesheets/application.css"
-  },
+   "build": "yarn build:css && bin/rails assets:precompile",
+   "build:css": "postcss app/assets/scss/application.scss -o app/assets/stylesheets/application.css"
+},
   "dependencies": {
     "postcss": "^8.4.41",
     "postcss-cli": "^11.0.0"
