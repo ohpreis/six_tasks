@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "build": "yarn build:css && bin/rails assets:precompile",
-    "build:css": "postcss app/assets/scss/application.scss -o app/assets/stylesheets/application.css"
-  },
-  "dependencies": {}
-}
