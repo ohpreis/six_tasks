@@ -9,7 +9,7 @@
           <% first_line = title_lines[0] %>
           <% truncated_line = first_line.length > maxLength ? first_line.truncate(maxLength, separator: ' ') : first_line %>
           <%= truncated_line %>
-          <%= ' _' if title_lines.length > 1 %>
+          <%= ' +' if title_lines.length > 1 %>
         </a>
       </strong>
       

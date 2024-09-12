@@ -34,15 +34,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
 
-    # check if the task is an idea or doing
-    if @task.title.nil?
-    isA = @task.title.split.last.delete(".!?,")
-    if isA == "@doing" || isA == "@idea"
-      @task.status = isA[1..-1]
-      # remove the isA from the string
-      @task.title = @task.title[0..-isA.length-1]
-    end
-    end
+    status(@task)
 
     respond_to do |format|
       if @task.save
@@ -52,6 +44,18 @@ class TasksController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def status(task)
+    pattern = /@doing|@idea/
+    last_occurrence = @task.title.match(pattern).to_s
+
+    status_map = { "@doing" => "doing", "@idea" => "idea" }
+
+    if last_occurrence.present?
+      @task.status = status_map[last_occurrence]
+      @task.title = @task.title.reverse.sub(last_occurrence.reverse, "").reverse
     end
   end
 
