@@ -5,9 +5,14 @@ class MorningPagesController < ApplicationController
 
   # GET /morning_pages or /morning_pages.json
   def index
-    if MorningPage.exists?(created_at: Date.today.midnight..Date.today.end_of_day)
-      @morning_page = MorningPage.find_by(created_at: Date.today.midnight..Date.today.end_of_day)
-    else
+    # Define the time range for today
+    today_range = Date.today.midnight..Date.today.end_of_day
+
+    # Find the morning page for the current user within the time range
+    @morning_page = MorningPage.where(created_at: today_range, user: current_user).first
+
+    # If no morning page is found, create a new one
+    unless @morning_page
       @morning_page = MorningPage.create!(created_at: Date.today, user: current_user, body: "get started")
     end
   end

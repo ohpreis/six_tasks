@@ -17,8 +17,8 @@
 
 /* Global variables. */
 
-.fish {
-  color: blue;
+.trix-content > div {
+  height: 100% !important;
 }
 
 .status-list {
@@ -31,7 +31,18 @@
   }
   
   
-  
+
+/* Size the Trix editor */
+trix-editor {
+  width: 100% !important; /* Set the width to 100% of its container */
+  height: 75vh !important; /* Set the height to 80% of the viewport height */
+  max-width: 800px !important; /* Optional: Set a maximum width */
+  margin: 0 0 20px 0 !important; /* Optional: Center the editor */
+}
+
+trix-editor .trix-content {
+  height: 100% !important; /* Ensure the content area takes up the full height */
+}
   
   
     /* Basic styling for desktop menu */
