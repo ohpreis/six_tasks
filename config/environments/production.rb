@@ -68,7 +68,7 @@ Rails.application.configure do
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
 
-  config.action_mailer.default_url_options = { host: "https://six-tasks-web.onrender.com", port: 3000 }
+  config.action_mailer.default_url_options = { host: "https://six-tasks-web.onrender.com" }
 
 
   # config.action_mailer.delivery_method = :letter_opener
