@@ -13,7 +13,7 @@ class MorningPagesController < ApplicationController
 
     # If no morning page is found, create a new one
     unless @morning_page
-      @morning_page = MorningPage.create!(created_at: Date.today, user: current_user, body: "get started")
+      @morning_page = MorningPage.create!(created_at: Date.today, user: current_user, body: "")
     end
   end
 
