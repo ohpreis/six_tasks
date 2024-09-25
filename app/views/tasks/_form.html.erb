@@ -1,38 +1,52 @@
 <%= form_with(model: task) do |form| %>
   <% if task.errors.any? %>
-    <div style="color: red">
-      <h5><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h5>
-
-      <ul>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert" data-controller="alert" data-alert-target="alert">
+      <h5 class="font-bold mb-2"><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h5>
+      <ul class="list-disc list-inside">
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
+      <span class="absolute top-0 bottom-0 right-0 px-4 py-3" data-action="click->alert#closeAlert">
+        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <title>Close</title>
+          <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
+        </svg>
+      </span>
     </div>
   <% end %>
 
   <div>
-    <%= form.text_area :title, rows: "10", cols: "60" %>
+    <%= form.text_area :title, 
+          id: "task_body",
+          class: "p-2.5 w-full h-[calc(100vh-174px)] overflow-auto text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
+          placeholder: "Write your thoughts here..." %>
   </div>
 
-  <div>
-    <ul class="status-list">
+  <!-- Sticky Footer Section -->
+<div class="fixed bottom-0 xs:left-0 w-full bg-white border-t border-gray-300 pb-8">
+
+    <div class="flex flex-col lg:flex-row lg:space-x-4 py-4">
       <% Task.statuses.each do |key, value| %>
-        <li>
-          <% id = "task_status_#{key}" %>
-          <%= form.radio_button :status, key, id: id, checked: (form.object.status == key) %>
-          <%= form.label :status, key.humanize, for: id %>
-        </li>
+        <% id = "task_status_#{key}" %>
+        <div class="flex items-center border rounded px-4 py-2 mb-2 lg:mb-0">
+          <%= form.radio_button :status, key, id: id, class: "form-radio text-blue-600" %>
+          <%= form.label :status, key.humanize, for: id, class: "ml-2 text-gray-700" %>
+        </div>
       <% end %>
-    </ul>
-  </div>
+    </div>
 
   <div>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  </div>
+    <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %> 
+    <%= link_to "Delete", task_path(task), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    }, 
+    class: "ms-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= link_to "Back to tasks", root_path, class: "ms-4 text-base font-bold text-blue-600 mb-1 hover:text-gray-900" %>
+    
 
-  <div>
-    <%= form.submit %>  
   </div>
+</div>
+
 <% end %>
-<%= button_to "Destroy this task", @task, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "warning-button" %>

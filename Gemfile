@@ -72,3 +72,5 @@ group :test do
   gem "factory_bot_rails"
   gem "database_cleaner-active_record"
 end
+
+gem "tailwindcss-rails", "~> 2.7"

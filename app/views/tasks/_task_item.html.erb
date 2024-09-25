@@ -2,23 +2,20 @@
     <% maxLength = 40 %>
     <% ellipsis = '...' %>
     <%# Next in Line %>
-    <p style="margin: 0 0 1rem 0;">
-      <strong>
-          <a data-id="<%= task.id %>" href="<%= edit_task_path(task) %>">
+    <p class="text-base font-bold text-blue-600 mb-1">
+          <a data-id="<%= task.id %>" href="<%= edit_task_path(task) %>" class="hover:text-gray-900">
           <% title_lines = task.title.split("\n") %>
           <% first_line = title_lines[0] %>
           <% truncated_line = first_line.length > maxLength ? first_line.truncate(maxLength, separator: ' ') : first_line %>
           <%= truncated_line %>
           <%= ' +' if title_lines.length > 1 %>
         </a>
-      </strong>
-      
       <br/>
 
       <%# Action Links %>
       <% statuses = Task.statuses.keys - [task.status] %>
       <% statuses.each_with_index do |status, index| %>
-        <%= link_to status.humanize, change_status_task_path(task, status: status), method: :patch, class: "smaller" %>
+        <%= link_to status.humanize, change_status_task_path(task, status: status), method: :patch, class: "hover:underline text-xs text-gray-500 space-x-1" %>
         <%= ' - ' unless index == statuses.size - 1 %>
       <% end %>
     </p>

@@ -1,42 +1,39 @@
-<!-- <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <% if user_signed_in? %>
-        <li><%= link_to 'My Profile', edit_user_registration_path %></li>
-        <li><%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "btn-link") %></li>
-    <% else %>
-        <li><%= link_to 'Login', new_user_session_path %></li>
-        <li><%= link_to 'Register', new_user_registration_path %></li>
-    <% end %>
-  </ul>    
 
-</nav>     -->
-
-
-<nav class="desktop-menu">
-  <a href="/">Home</a>
-  <% if user_signed_in? %>
-      <%= link_to 'Morning Page', morning_pages_path %>
-      <%= link_to 'My Profile', edit_user_registration_path %>
-      <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "btn-link") %>
-  <% else %>
-      <%= link_to 'Login', new_user_session_path %>
-      <%= link_to 'Register', new_user_registration_path %>
-  <% end %>
-</nav>
-
-<nav class="mobile-menu">
-  <input type="checkbox" id="menu-toggle">
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
-  <div class="menu-items">
-    <a href="/">Home</a>
-    <% if user_signed_in? %>
-        <%= link_to 'Morning Page', morning_pages_path %>
-        <%= link_to 'My Profile', edit_user_registration_path, class: "has_bottom_border" %>
-        <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "btn-link") %>
-    <% else %>
-        <%= link_to 'Login', new_user_session_path %>
-        <%= link_to 'Register', new_user_registration_path %>
-    <% end %>
+<!-- sidebar -->
+<div class="hidden md:flex flex-col w-64 bg-gray-800">
+  <div class="flex items-center justify-center h-16 bg-gray-900">
+      <span class="text-white font-bold uppercase">Sidebar</span>
   </div>
-</nav>
+  <div class="flex flex-col flex-1 overflow-y-auto">
+    <nav class="flex-1 px-2 py-4 bg-gray-800">
+
+      <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        Home
+      </a>
+      <% if user_signed_in? %>
+        <%= link_to 'Morning Page', morning_pages_path, class: "flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700" %>
+        <%= link_to 'My Profile', edit_user_registration_path, class: "flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700" %>
+        <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700") %>
+      <% else %>
+        <%= link_to new_user_session_path, class: "flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11V7a4 4 0 00-8 0v4H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2v-6a2 2 0 00-2-2h-1zM8 7a2 2 0 014 0v4H8V7z" />
+          </svg>
+          Login
+        <% end %>
+        <%= link_to new_user_registration_path, class: "flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 10-8 0v4H5a2 2 0 00-2 2v6a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2h-3zM8 7a2 2 0 114 0v4H8V7zM12 14h4m-2-2v4" />
+          </svg>
+          Register
+        <% end %>
+      <% end %>
+      </nav>
+      </div>
+      </div>
+    </nav>
+  </div>
+</div>

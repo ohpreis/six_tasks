@@ -1,48 +1,53 @@
-<% if current_user.present? %>
-    <%= form_with model: @task do |form| %>
-        <%= form.text_field :title, size: "40" %>
-    <%= form.submit %>
+
+    <% if current_user.present? %>
+
+        <%= render "tasks/short_form" %>
+
+        <!-- Doing Section -->
+        <div class="lg:my-2 text-xl font-bold text-orange-600 mb-2 lg:block">Doing</div>
+        <div class="p-2">
+            <% if @doing.present? %>
+                <% @doing.each do |doing| %>
+                    <%= render "tasks/task_item", task: doing %>
+                <% end %>
+            <% else %>
+                Nothing to show yet.
+            <% end %>
+        </div>
+
+        <!-- Backlog Section -->
+        <div class="lg:my-2 text-xl font-bold text-orange-600 mb-2 lg:block">Backlog</div>
+        <div class="lg:my-2 p-2">
+            <% if @backlog.present? %>
+                <% @backlog.each do |backlog| %>
+                    <%= render "tasks/task_item", task: backlog %>
+                <% end %>
+            <% else %>
+                Nothing to show yet.
+            <% end %>
+        </div>
+
+        <!-- Ideas Section -->
+        <div class="lg:my-2 text-xl font-bold text-orange-600 mb-2 lg:block">Ideas</div>
+        <div class="lg:my-2 p-2">
+            <% if @ideas.present? %>
+                <% @ideas.each do |idea| %>
+                    <%= render "tasks/task_item", task: idea %>
+                <% end %>
+            <% else %>
+                Nothing to show yet.
+            <% end %>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-300 my-4"></div>
+        <p class="text-xs text-gray-500 space-x-1"><%= link_to 'Done Tasks', completed_path %></p>
+
+    <% else %>
+        <p class="font-bold">Hi, to continue please 
+            <%= link_to 'log in', new_user_session_path, class: "base-link" %> or 
+            <%= link_to 'register', new_user_registration_path, class: "base-link" %>.</p>
+        <p>If you like to learn what the SixTasks method is all about 
+            please visit <a class="base-link" target="_blank" href="https://www.sixtasks.com">SixTasks.com</a>
+        </p>
     <% end %>
-    <fieldset>
-        <legend>Doing</legend>
-        <% if @doing.present? %>
-            <% @doing.each do |doing| %>
-                <%= render "tasks/task_item", task: doing %>
-            <% end %>
-        <% else %>
-                <p>Nothing yet.</p>
-        <% end %>
-        
-    </fieldset>
-
-    <fieldset>
-        <legend>Backlog</legend>
-        <% if @backlog.present? %>
-            <% @backlog.each do |backlog| %>
-                <%= render "tasks/task_item", task: backlog %>
-            <% end %>
-        <% else %>
-                <p>There Backlog is empty! What?</p>
-        <% end %>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Ideas</legend>
-        <% if @ideas.present? %>
-            <% @ideas.each do |idea| %>
-                <%= render "tasks/task_item", task: idea %>
-            <% end %>
-        <% else %>
-                <p>No Ideas?</p>
-        <% end %>
-    </fieldset>
-
-    <p><%= link_to 'Done Tasks', completed_path %></p>
-
-<% else %>
-  <p>Hi, to continue please 
-    <%= link_to 'log in', new_user_session_path %> or <%= link_to 'register', new_user_registration_path %>.</p>
-  <p>If you like to learn what the SixTasks method is all about 
-    please visit <a target="_blank" href="https://www.sixtasks.com">SixTasks.com</a>
-  </p>
-<% end %>
