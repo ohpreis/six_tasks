@@ -33,6 +33,7 @@ class MorningPagesController < ApplicationController
   # POST /morning_pages or /morning_pages.json
   def create
     @morning_page = MorningPage.new(morning_page_params)
+    @morning_page.user = current_user
 
     respond_to do |format|
       if @morning_page.save
@@ -48,9 +49,10 @@ class MorningPagesController < ApplicationController
   # PATCH/PUT /morning_pages/1 or /morning_pages/1.json
   def update
     respond_to do |format|
+      @morning_page.user = current_user
       if @morning_page.update(morning_page_params)
         format.html { redirect_to edit_morning_page_path(@morning_page), notice: "Morning page was successfully updated." }
-        format.json { render :show, status: :ok, location: @morning_page }
+        format.json { render json: { message: "ok" }, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @morning_page.errors, status: :unprocessable_entity }
