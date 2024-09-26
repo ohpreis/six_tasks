@@ -24,10 +24,10 @@ export default class extends Controller {
       body: JSON.stringify({ morning_page: { body: body } })
     })
     .then(response => {
-      console.log("Autosave response", response)
       if (!response.ok) {
         throw new Error("Network response was not ok")
       }
+      showStatus("Content saved")
       return response.json()
     })
     .then(data => {
@@ -50,4 +50,14 @@ function debounce(func, wait) {
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
+}
+
+function showStatus(message) {
+  const statusTarget = document.getElementById("autosave-status")
+  statusTarget.textContent = message
+  statusTarget.style.opacity = 1
+  setTimeout(() => {
+    statusTarget.style.transition = "opacity 1s"
+    statusTarget.style.opacity = 0
+  }, 1000)
 }
