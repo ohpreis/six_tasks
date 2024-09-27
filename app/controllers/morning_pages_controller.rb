@@ -24,6 +24,8 @@ class MorningPagesController < ApplicationController
   def count_words(content)
     # Strip HTML tags and count the words
     plain_text = ActionView::Base.full_sanitizer.sanitize(content)
+    # Check first if there is any content
+    return 0 if plain_text.blank?
     plain_text.split(/\s+/).count
   end
 

@@ -19,6 +19,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :time_zone %>
+    <%= f.time_zone_select :time_zone, nil, { default: "UTC" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" %>
+  </div>
+
+  <div class="field">
     <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
     <% if @minimum_password_length %>
       <em class="text-xs text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
