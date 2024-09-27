@@ -1,12 +1,6 @@
-<div id="<%= dom_id morning_page %>">
-  <p>
-    <strong>Body:</strong>
-    <%= morning_page.body %>
+<div class="m-4" id="<%= dom_id morning_page %>">
+    <p class="my-3 font-semibold text-lg border-b-2 border-gray-300 pb-2">
+    Created: <%= morning_page.created_at.strftime("%A, %B %d, %Y") %>
   </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= morning_page.user_id %>
-  </p>
-
+  <%= morning_page.body %>
 </div>

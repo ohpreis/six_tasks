@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :morning_pages
+  resources :morning_pages do
+    collection do
+      get :archive
+    end
+  end
   resources :tasks do
     member do
       get :change_status
