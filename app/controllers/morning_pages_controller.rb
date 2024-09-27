@@ -15,6 +15,16 @@ class MorningPagesController < ApplicationController
     unless @morning_page
       @morning_page = MorningPage.create!(created_at: Date.today, user: current_user, body: "")
     end
+    # count the number of words in the morning page
+    # and store it in the instance variable @word_count
+    @word_count = count_words(@morning_page.body)
+  end
+
+  # Helper method to count words in the given content
+  def count_words(content)
+    # Strip HTML tags and count the words
+    plain_text = ActionView::Base.full_sanitizer.sanitize(content)
+    plain_text.split(/\s+/).count
   end
 
   def archive

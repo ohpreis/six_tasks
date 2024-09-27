@@ -1,14 +1,25 @@
 <%= form_with(model: task) do |form| %>
+  
+  <%# Display error messages %>
   <% if task.errors.any? %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert" data-controller="alert" data-alert-target="alert">
-      <h5 class="font-bold mb-2"><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h5>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" 
+         role="alert" 
+         data-controller="alert" 
+         data-alert-target="alert">
+      <h5 class="font-bold mb-2">
+        <%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:
+      </h5>
       <ul class="list-disc list-inside">
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
-      <span class="absolute top-0 bottom-0 right-0 px-4 py-3" data-action="click->alert#closeAlert">
-        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+      <span class="absolute top-0 bottom-0 right-0 px-4 py-3" 
+            data-action="click->alert#closeAlert">
+        <svg class="fill-current h-6 w-6 text-red-500" 
+             role="button" 
+             xmlns="http://www.w3.org/2000/svg" 
+             viewBox="0 0 20 20">
           <title>Close</title>
           <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
         </svg>
@@ -24,8 +35,7 @@
   </div>
 
   <!-- Sticky Footer Section -->
-<div class="fixed bottom-0 xs:left-0 w-full bg-white border-t border-gray-300 pb-8">
-
+  <div class="fixed bottom-0 xs:left-0 w-full bg-white border-t border-gray-300 pb-8">
     <div class="flex flex-col lg:flex-row lg:space-x-4 py-4">
       <% Task.statuses.each do |key, value| %>
         <% id = "task_status_#{key}" %>
@@ -36,17 +46,14 @@
       <% end %>
     </div>
 
-  <div>
-    <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %> 
-    <%= link_to "Delete", task_path(task), data: {
-      turbo_method: :delete,
-      turbo_confirm: "Are you sure?"
-    }, 
-    class: "ms-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-    <%= link_to "Back to tasks", root_path, class: "ms-4 text-base font-bold text-blue-600 mb-1 hover:text-gray-900" %>
-    
-
+    <div>
+      <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %> 
+      <%= link_to "Delete", task_path(task), data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      }, 
+      class: "ms-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+      <%= link_to "Back to tasks", root_path, class: "ms-4 text-base font-bold text-blue-600 mb-1 hover:text-gray-900" %>
+    </div>
   </div>
-</div>
-
 <% end %>
