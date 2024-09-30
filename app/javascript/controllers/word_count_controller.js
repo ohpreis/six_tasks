@@ -4,12 +4,22 @@ export default class extends Controller {
   static targets = ["editor", "wordCount"]
 
   connect() {
-    this.updateWordCount() // Initialize the word count on page load
+    // Ensure the word count is updated once the editor is fully initialized
+    this.editorTarget.addEventListener("trix-initialize", this.updateWordCount.bind(this))
+
+    // Listen for content changes in the editor
+    this.editorTarget.addEventListener("trix-change", this.updateWordCount.bind(this))
   }
 
   updateWordCount() {
-    const text = this.editorTarget.value.trim()
+    // Get the text content from the Trix editor and strip any HTML
+    const text = this.editorTarget.editor.getDocument().toString().trim()
+
+    // Calculate the word count (splitting by spaces)
     const wordCount = text.length > 0 ? text.split(/\s+/).length : 0
-    this.wordCountTarget.textContent = `${wordCount} words`
+
+    // Update the word count display
+    let wordCountTarget = document.getElementById("word-count")
+    wordCountTarget.textContent = `${wordCount} words`
   }
 }

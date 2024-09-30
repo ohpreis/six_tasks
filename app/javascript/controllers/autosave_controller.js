@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["editor"]
+  static targets = ["editor", "wordCount"]
 
   connect() {
     this.save = debounce(this.save.bind(this), 2000) // Save every 2 seconds of inactivity
