@@ -65,7 +65,7 @@ class TasksController < ApplicationController
       @task.user = current_user
       if @task.update(task_params)
         format.html { redirect_to edit_task_path(@task), notice: "Task was successfully updated." }
-        format.json { render :show, status: :ok, location: @task }
+        format.json { render json: { message: "ok" }, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }

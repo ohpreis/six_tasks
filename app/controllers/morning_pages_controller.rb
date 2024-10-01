@@ -66,6 +66,7 @@ class MorningPagesController < ApplicationController
   # PATCH/PUT /morning_pages/1 or /morning_pages/1.json
   def update
     respond_to do |format|
+      puts params
       @morning_page.user = current_user
       if @morning_page.update(morning_page_params)
         format.html { redirect_to edit_morning_page_path(@morning_page), notice: "Morning page was successfully updated." }

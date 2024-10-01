@@ -5,23 +5,35 @@ export default class extends Controller {
 
   connect() {
     this.save = debounce(this.save.bind(this), 2000) // Save every 2 seconds of inactivity
-    this.editorTarget.addEventListener("trix-change", this.save)
+    // this is an textarea else it's a trix-editor
+    console.log("this.editorTarget", this.editorTarget)
+    if (this.editorTarget.nodeName === "TEXTAREA") {
+      this.editorTarget.addEventListener("input", this.save)
+    } else {
+      this.editorTarget.addEventListener("trix-change", this.save)
+    }
   }
 
   save() {
-    // const url = this.data.get("autosaveUrl")
-    const url = document.getElementById("autosave-url").value + ".json"
-    console.log("Autosaving to", url)
-    // const body = this.editorTarget.editor.getDocument().toString()
-    const body = this.editorTarget.innerHTML
-
+    const url = this.data.get("url") + ".json"
+    // const body = this.editorTarget.innerHTML
+    let content = ""
+    let body = ""
+    if (url.includes("morning_page")) {
+      content = this.editorTarget.innerHTML
+      body = JSON.stringify({ morning_page: { body: content } })
+    } else {
+      content = this.editorTarget.value
+      body = JSON.stringify({ task: { title: content } })
+    }
+    console.log("body", body)
     fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
-      body: JSON.stringify({ morning_page: { body: body } })
+      body: body
     })
     .then(response => {
       if (!response.ok) {

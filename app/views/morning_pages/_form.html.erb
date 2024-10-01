@@ -14,10 +14,11 @@
     <input type="hidden" name="url" id="autosave-url" value="<%= morning_page_path(morning_page) %>">
   </div>
 
-  <div>
+  <div data-controller="autosave word-count"
+    data-autosave-url="<%= morning_page_path(morning_page) %>">
+
     <%= form.rich_text_area :body, 
       data: { 
-        controller: "autosave word-count", 
         autosave_target: "editor",
         word_count_target: "editor",
         action: "trix-change->autosave#save trix-change->word-count#updateWordCount"
