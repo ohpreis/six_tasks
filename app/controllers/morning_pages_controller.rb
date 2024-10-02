@@ -31,7 +31,7 @@ class MorningPagesController < ApplicationController
 
   def archive
     # Find all morning pages for the current user
-    @morning_pages = MorningPage.where(user: current_user).order(created_at: :desc)
+    @pagy, @morning_pages = pagy(MorningPage.where(user: current_user).order(created_at: :desc))
   end
 
   # GET /morning_pages/1 or /morning_pages/1.json

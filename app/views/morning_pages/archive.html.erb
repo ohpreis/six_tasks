@@ -1,8 +1,9 @@
 <%= render "tasks/short_form" %>
 
-<h1 class="text-3xl font-bold mb-6">Past entries</h1>
+<h1 class="text-3xl font-bold mb-6">Past entries <%= @morning_pages.count %></h1>
 
 <div class="space-y-4">
+
   <% @morning_pages.each do |morning_page| %>
     <div class="p-4 bg-white shadow rounded-lg">
       <h2 class="text-xl font-semibold text-gray-800"><%= morning_page.created_at.strftime("%A, %B %d, %Y") %></h2>
@@ -16,4 +17,7 @@
       </p>
     </div>
   <% end %>
+
+  <%== pagy_nav(@pagy) %>
+
 </div>

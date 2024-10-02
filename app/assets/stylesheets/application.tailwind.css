@@ -13,6 +13,7 @@
 */
 
 @layer components {
+  
   .base-link {
     @apply text-base font-bold text-blue-600 mb-1 hover:text-gray-900;
   }

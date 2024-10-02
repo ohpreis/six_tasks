@@ -1,5 +1,7 @@
 module ApplicationHelper
   require "nokogiri"
+  # Include it in the helpers (e.g. application_helper.rb)
+  include Pagy::Frontend
 
   def first_line_of_trix_content(content, length = 30)
     # Convert ActionText::RichText to plain text if necessary
