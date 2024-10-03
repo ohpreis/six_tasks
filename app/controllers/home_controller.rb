@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   end
 
   def completed
-    @completed_tasks = Task.where(status: "done").where(user: current_user.id)
+    @pagy, @completed_tasks = pagy(Task.where(status: "done").where(user: current_user.id))
   end
 
   def help
