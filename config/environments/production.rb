@@ -77,11 +77,11 @@ Rails.application.configure do
   # MAILTRAP
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: ENV["MAILTRAP_USERNAME"] || Rails.application.credentials.dig(:mailtrap, :username),
-    password: ENV["MAILTRAP_PASSWORD"] || Rails.application.credentials.dig(:mailtrap, :password),
-    address: "sandbox.smtp.mailtrap.io",
-    host: "sandbox.smtp.mailtrap.io",
-    port: "2525",
+    user_name: "api",
+    password: "c33df69d65cf987c92663d7deee24f86",
+    address: "live.smtp.mailtrap.io",
+    host: "live.smtp.mailtrap.io",
+    port: "587",
     authentication: :login
   }
 
