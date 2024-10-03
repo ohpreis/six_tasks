@@ -5,10 +5,10 @@
 <div class="space-y-4">
 
   <% @morning_pages.each do |morning_page| %>
-    <div class="p-4 bg-white shadow rounded-lg">
+    <div class="p-1 bg-white shadow rounded-lg">
       <h2 class="text-xl font-semibold text-gray-800"><%= morning_page.created_at.strftime("%A, %B %d, %Y") %></h2>
       <!-- If there is body content, display the first line or else display a message -->
-      <p class="text-gray-600 mt-2">
+      <p class="text-gray-600 mt-1">
         <% if morning_page.body.present? %>
           <%= link_to first_line_of_trix_content(morning_page.body, 30), morning_page_path(morning_page), class: "text-blue-500 hover:underline" %>
         <% else %>
