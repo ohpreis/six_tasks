@@ -34,10 +34,10 @@
 
         <!-- Sidebar -->
         <!-- <aside style="z-index: 999;" data-controller="main" id="mainSidebar" class="bg-gray-800 text-white w-64 min-w-64 h-full fixed inset-0 lg:relative lg:h-screen transition-transform duration-300 ease-in-out"> -->
-          <aside style="z-index: 999;" data-controller="main" id="mainSidebar" class="bg-gray-800 text-white w-64 min-w-64 h-full fixed inset-0 lg:relative lg:h-screen lg:block hidden transition-transform duration-300 ease-in-out">
+          <aside style="z-index: 999;" data-main-target="sidebar" data-controller="main" id="mainSidebar" class="bg-gray-800 text-white w-64 min-w-64 h-full fixed inset-0 lg:relative lg:h-screen lg:block hidden transition-transform duration-300 ease-in-out">
             <div class="flex justify-between items-center p-4">
                 <h1 class="text-3xl">SixTasks</h1>
-                <button data-action="click->main#toggleSidebar" class="lg:hidden">
+                <button data-action="click->main#closeSidebar" class="lg:hidden">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>

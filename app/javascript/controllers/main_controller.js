@@ -7,11 +7,11 @@ export default class extends Controller {
 
   toggleSidebar() {
     const sidebar = document.getElementById('mainSidebar');
-    sidebar.classList.toggle('-translate-x-full');
+    sidebar.classList.remove('hidden');
   }
 
   closeSidebar() {
     const sidebar = document.getElementById('mainSidebar');
-    sidebar.classList.add('-translate-x-full');
+    sidebar.classList.add('hidden');
   }
 }
