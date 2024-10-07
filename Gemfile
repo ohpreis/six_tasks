@@ -46,7 +46,7 @@ gem "faker", require: false
 
 gem "nokogiri"
 
-gem "pagy", "~> 9.0" # omit patch digit
+gem "pagy", "~> 9.1" # omit patch digit
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
