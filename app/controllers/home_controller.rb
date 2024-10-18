@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :set_layout
+
   def index
     @task = Task.new
     @doing = Task.where(status: :doing).where(user: current_user)
@@ -15,12 +17,15 @@ class HomeController < ApplicationController
 
   private
 
-  def set_morning_page
-    today = Date.current
-    if MorningPage.exists?(created_at: today.midnight..today.end_of_day)
-      @morning_page = MorningPage.find_by(created_at: today.midnight..today.end_of_day).first
+  def set_layout
+    if user_signed_in?
+      self.class.layout "application"
     else
-      @morning_page = MorningPage.create!(created_at: today, user: current_user, body: "get started")
+      self.class.layout "application"
     end
+  end
+
+  def user_signed_in?
+    current_user.present?
   end
 end

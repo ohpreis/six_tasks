@@ -45,39 +45,6 @@
 
     <% else %>
         
-        <div class="m-0">
-
-            <div class="mb-4">
-                <h1 class="text-2xl mb-4">Welcome to SixTasks!</h1>
-                <p class="mb-2">
-                    SixTasks is a method that keeps you focused on what truly matters. 
-                    Instead of managing endless to-do lists, you select six key tasks 
-                    to complete each day. 
-                </p>
-                <p class="mb-2">
-                    This approach forces prioritization and keeps 
-                    you aligned with your most important goals. 
-                </p>
-                <p class="mb-2">
-                    As a result, you achieve 
-                    more with less stress, helping you maintain a healthy work-life balance. 
-                    Who to say it better than Margaret Thatcher:
-                </p>
-            </div>
-
-            <blockquote class="border-t-4 border-orange-600 pl-4 my-4 italic text-lg font-semibold text-gray-800 bg-orange-100 p-4 rounded-md shadow-md">
-                Plan your work for today and every day, then work your plan.
-                <span class="block mt-2 text-left text-orange-600 font-bold font-semibold text-sm">- Margaret Thatcher</span>
-            </blockquote>
-
-        </div>
+        <%= render "home/home-page" %>
         
-
-
-        <p class="font-bold">Hi, to continue please 
-            <%= link_to 'log in', new_user_session_path, class: "base-link" %> or 
-            <%= link_to 'register', new_user_registration_path, class: "base-link" %>.</p>
-        <p>If you like to learn what the SixTasks method is all about 
-            please visit <a class="base-link" target="_blank" href="https://www.sixtasks.com">SixTasks.com</a>
-        </p>
     <% end %>

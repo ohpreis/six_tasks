@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "SixTasks" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+
+    <!-- Sidebar Toggle Button -->
+    <div class="lg:hidden" data-controller="main">
+        <button data-action="click->main#toggleSidebar" class="text-3xl p-4 bg-gray-800 text-white w-full flex justify-between items-center">
+            <span>SixTasks</span>
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="flex w-full lg:w-3/4 lg:max-w-4xl">
+
+        <!-- Sidebar -->
+        <!-- <aside style="z-index: 999;" data-controller="main" id="mainSidebar" class="bg-gray-800 text-white w-64 min-w-64 h-full fixed inset-0 lg:relative lg:h-screen transition-transform duration-300 ease-in-out"> -->
+          <aside style="z-index: 999;" data-main-target="sidebar" data-controller="main" id="mainSidebar" class="bg-gray-800 text-white w-64 min-w-64 h-full fixed inset-0 lg:relative lg:h-screen lg:block hidden transition-transform duration-300 ease-in-out">
+            <div class="flex justify-between items-center p-4">
+                <h1 class="text-3xl">SixTasks</h1>
+                <button data-action="click->main#closeSidebar" class="lg:hidden">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+            </div>
+    
+            <!-- Menu Items -->
+            <ul>
+                <li class="p-2 hover:bg-gray-700 transition-colors duration-300 group">
+                    <a href="/" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <% if user_signed_in? %>
+                <li class="p-2 hover:bg-gray-700 transition-colors duration-300 group">
+                    <%= link_to morning_pages_path, class: "flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6a4 4 0 110 8 4 4 0 010-8z" />
+                      </svg>
+                      Morning Page
+                    <% end %>
+                  </li>
+                  <li class="p-2 hover:bg-gray-700 transition-colors duration-300 group">
+                    <%= link_to edit_user_registration_path, class: "flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.953 9.953 0 0112 15c2.21 0 4.21.722 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      Profile
+                    <% end %>
+                  </li>
+                  <li class="p-2 hover:bg-gray-700 transition-colors duration-300 group">
+                    <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      Log Out
+                    <% end %>
+                  </li>
+                <% else %>
+                <li class="p-2 hover:bg-gray-700 transition-colors duration-300 group">
+                    <%= link_to new_user_session_path, class: "flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11V7a4 4 0 00-8 0v4H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2v-6a2 2 0 00-2-2h-1zM8 7a2 2 0 014 0v4H8V7z" />
+                        </svg>
+                        Login
+                    <% end %>
+                </li>
+                <li class="p-2 hover:bg-gray-700 transition-colors duration-300 group">
+                    <%= link_to new_user_registration_path, class: "flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 10-8 0v4H5a2 2 0 00-2 2v6a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2h-3zM8 7a2 2 0 114 0v4H8V7zM12 14h4m-2-2v4" />
+                        </svg>
+                        Register
+                    <% end %>
+                </li>
+                <% end %>
+            </ul>
+        </aside>
+    
+        <!-- Main Content -->
+        <div class="mx-6 my-4 w-full">
+          <div data-controller="alert">
+            <% if notice.present? %>
+            <div data-alert-target="notice" class="bg-blue-100 border border-blue-400 text-blue-700 mb-4 px-4 py-3 rounded relative" role="alert">
+              <span class="block sm:inline"><%= notice %></span>
+              <span data-action="click->alert#closeNotice" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-blue-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <title>Close</title>
+                  <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
+                </svg>
+              </span>
+            </div>
+            <% end %>
+            <% if alert.present? %>
+            <div data-alert-target="alert" class="bg-red-100 border border-red-400 text-red-700 mb-4 px-4 py-3 rounded relative" role="alert">
+              <span class="block sm:inline"><%= alert %></span>
+              <span data-action="click->alert#closeAlert" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <title>Close</title>
+                  <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
+                </svg>
+              </span>
+            </div>
+            <% end %>
+          </div>
+          
+          <%= yield %>  
+        </div>
+    </div>
+    
+  </body>
+</html>
