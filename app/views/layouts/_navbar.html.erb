@@ -1,0 +1,102 @@
+<nav class="bg-white shadow" data-controller="main">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center max-w-5xl">
+
+        <div class="flex items-center space-x-4">
+            <a href="/" class="text-xl font-bold">SixTasks&trade;</a>
+            <a href="/" class="flex items-center text-gray-700 hover:text-gray-900 px-3 hidden md:flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 9v-6h4v6m-4 0h4m-4 0H5a2 2 0 01-2-2V9a2 2 0 012-2h3m10 0h3a2 2 0 012 2v7a2 2 0 01-2 2h-3m-4 0h4" />
+                </svg>
+                Home
+            </a>
+            <a href="#" class="text-gray-700 hover:text-gray-900 px-3 hidden md:flex ">
+                About
+            </a>
+        </div>
+
+        <div class="hidden md:flex space-x-4">
+            <% if current_user.present? %>
+                <%= link_to morning_pages_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6a4 4 0 110 8 4 4 0 010-8z" />
+                    </svg>
+                    Morning Page
+                <% end %>
+                    <%= link_to edit_user_registration_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.953 9.953 0 0112 15c2.21 0 4.21.722 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      Profile
+                    <% end %>
+                <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Log Out
+                <% end %>
+            <% else %>
+                <%= link_to new_user_session_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11V7a4 4 0 00-8 0v4H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2v-6a2 2 0 00-2-2h-1zM8 7a2 2 0 014 0v4H8V7z" />
+                    </svg>
+                    Login
+                <% end %>
+                    <%= link_to new_user_registration_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 10-8 0v4H5a2 2 0 00-2 2v6a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2h-3zM8 7a2 2 0 114 0v4H8V7zM12 14h4m-2-2v4" />
+                        </svg>
+                        Register
+                    <% end %>
+            <% end %>
+        </div>
+        <div class="md:hidden">
+            <button data-action="click->main#toggleDrawer" id="hamburger" class="text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6 pt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="drawer" data-main-target="drawer" class="drawer md:hidden bg-white shadow-lg py-3">
+        <a href="/" class="block flex items-center text-gray-700 hover:text-gray-900 px-3 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 9v-6h4v6m-4 0h4m-4 0H5a2 2 0 01-2-2V9a2 2 0 012-2h3m10 0h3a2 2 0 012 2v7a2 2 0 01-2 2h-3m-4 0h4" />
+            </svg>
+            Home
+        </a>
+        <% if current_user.present? %>
+            <%= link_to morning_pages_path, class: "block flex items-center text-gray-700 hover:text-gray-900 px-3 py-3" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6a4 4 0 110 8 4 4 0 010-8z" />
+                </svg>
+                Morning Page
+            <% end %>
+                <%= link_to edit_user_registration_path, class: "block flex items-center  text-gray-700 hover:text-gray-900 px-3 py-3" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.953 9.953 0 0112 15c2.21 0 4.21.722 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Profile
+                <% end %>
+            <%= button_to destroy_user_session_path, method: :delete, class: "block flex items-center text-gray-700 hover:text-gray-900 px-3 py-3" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Log Out
+            <% end %>
+        <% else %>
+            <%= link_to new_user_session_path, class: "block flex items-center text-gray-700 hover:text-gray-900 px-3 py-3" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11V7a4 4 0 00-8 0v4H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2v-6a2 2 0 00-2-2h-1zM8 7a2 2 0 014 0v4H8V7z" />
+                </svg>
+                Login
+            <% end %>
+                <%= link_to new_user_registration_path, class: "block flex items-center text-gray-700 hover:text-gray-900 px-3 py-3" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 10-8 0v4H5a2 2 0 00-2 2v6a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2h-3zM8 7a2 2 0 114 0v4H8V7zM12 14h4m-2-2v4" />
+                    </svg>
+                    Register
+                <% end %>
+        <% end %>
+    </div>
+</nav>

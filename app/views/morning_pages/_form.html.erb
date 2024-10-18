@@ -1,4 +1,5 @@
-<%= form_with(model: morning_page) do |form| %>
+
+<%= form_with(model: morning_page, html: { class: "lg:w-3/4" }) do |form| %>
 
   <% if morning_page.errors.any? %>
     <div style="color: red">
@@ -28,8 +29,8 @@
     
     <div class="grid grid-cols-4 gap-4 mt-4">
       <div class="col-span-2">
-        <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %>  
-        <%= link_to "Archive", archive_morning_pages_path, class: "bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
+        <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white md:font-bold py-1 px-2 rounded cursor-pointer" %>  
+        <%= link_to "Archive", archive_morning_pages_path, class: "bg-gray-600 hover:bg-gray-700 text-white md:font-bold py-1 px-2 rounded cursor-pointer" %>
       </div>
       <div class="col-span-1">
         <span id="autosave-status" class="text-gray-500"></span>
