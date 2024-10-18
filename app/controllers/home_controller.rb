@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def completed
-    @pagy, @completed_tasks = pagy(Task.where(status: "done").where(user: current_user.id))
+        @pagy, @completed_tasks = pagy(Task.where(status: "done").where(user: current_user.id).order(created_at: :desc))
   end
 
   def help
