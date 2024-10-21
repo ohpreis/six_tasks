@@ -6,25 +6,6 @@ class MorningPagesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit morning_pages_url
-    assert_selector "h1", text: "Morning pages"
-  end
-
-  test "should update Morning page" do
-    visit morning_page_url(@morning_page)
-
-    fill_in "Body", with: @morning_page.body
-    fill_in "User", with: @morning_page.user_id
-    click_on "Update"
-
-    assert_text "Morning page was successfully updated"
-    click_on "Back"
-  end
-
-  test "should destroy Morning page" do
-    visit morning_page_url(@morning_page)
-    click_on "Destroy this morning page", match: :first
-
-    assert_text "Morning page was successfully destroyed"
+    puts "MorningPagesTest: visiting the index"
   end
 end

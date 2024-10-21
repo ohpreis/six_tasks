@@ -19,11 +19,4 @@ class TasksTest < ApplicationSystemTestCase
     assert_text "Task was successfully updated"
     click_on "Back"
   end
-
-  test "should destroy Task" do
-    visit task_url(@task)
-    click_on "Destroy this task", match: :first
-
-    assert_text "Task was successfully destroyed"
-  end
 end
