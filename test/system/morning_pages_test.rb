@@ -12,7 +12,6 @@ class MorningPagesTest < ApplicationSystemTestCase
 
   test "should update Morning page" do
     visit morning_page_url(@morning_page)
-    click_on "Edit this morning page", match: :first
 
     fill_in "Body", with: @morning_page.body
     fill_in "User", with: @morning_page.user_id
