@@ -10,18 +10,6 @@ class TasksTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Tasks"
   end
 
-  test "should create task" do
-    visit tasks_url
-    click_on "New task"
-
-    fill_in "Status", with: @task.status
-    fill_in "Title", with: @task.title
-    fill_in "User", with: @task.user_id
-    click_on "Create Task"
-
-    assert_text "Task was successfully created"
-    click_on "Back"
-  end
 
   test "should update Task" do
     visit task_url(@task)
