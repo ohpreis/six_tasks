@@ -25,7 +25,7 @@ set :output, "log/cron_log.log"
 # Run every day at 12:05 pm
 # This will reset the morning page for the day
 # and reset the task list for the day
-every 1.day, at: "1:25 pm" do
-  runner "Task.chron_reset"
-  runner "MorningPage.chron_reset"
+every 20.minutes do
+  rake "batch:generate_new"
+  rake "batch:update_tasks"
 end
