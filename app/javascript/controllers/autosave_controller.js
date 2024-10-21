@@ -6,7 +6,6 @@ export default class extends Controller {
   connect() {
     this.save = debounce(this.save.bind(this), 2000) // Save every 2 seconds of inactivity
     // this is an textarea else it's a trix-editor
-    console.log("this.editorTarget", this.editorTarget)
     if (this.editorTarget.nodeName === "TEXTAREA") {
       this.editorTarget.addEventListener("input", this.save)
     } else {
@@ -26,7 +25,7 @@ export default class extends Controller {
       content = this.editorTarget.value
       body = JSON.stringify({ task: { title: content } })
     }
-    console.log("body", body)
+
     fetch(url, {
       method: "PUT",
       headers: {
