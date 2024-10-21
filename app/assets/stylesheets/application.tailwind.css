@@ -36,6 +36,12 @@
     line-height: 1.25rem !important;
     @apply leading-5 font-semibold mb-4;
   }
+
+  trix-editor .small-text {
+    font-size: 0.75rem !important;
+    line-height: 0.75rem !important;
+    @apply leading-5 font-semibold text-gray-500 mb-4;
+  }
   
   trix-editor a:not(.no-underline) {
     @apply underline;
