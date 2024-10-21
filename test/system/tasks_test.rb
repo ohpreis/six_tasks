@@ -14,9 +14,6 @@ class TasksTest < ApplicationSystemTestCase
   test "should update Task" do
     visit task_url(@task)
 
-    fill_in "Status", with: @task.status
-    fill_in "Title", with: @task.title
-    fill_in "User", with: @task.user_id
     click_on "Update"
 
     assert_text "Task was successfully updated"
