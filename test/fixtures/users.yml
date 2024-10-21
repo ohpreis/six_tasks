@@ -9,6 +9,7 @@ one:
   first_name: User
   last_name: One
   encrypted_password: password
+  time_zone: "Central Time (US & Canada)"
   confirmed_at: <%= Time.now.utc %>
 
 two:
@@ -16,4 +17,5 @@ two:
   first_name: User
   last_name: Two
   encrypted_password: password
+  time_zone: "Central Time (US & Canada)"
   confirmed_at: <%= Time.now.utc %>
