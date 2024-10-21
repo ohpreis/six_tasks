@@ -38,8 +38,6 @@ gem "image_processing", "~> 1.2"
 #
 gem "devise"
 
-gem "whenever", require: false
-
 gem "dotenv-rails", groups: [ :development, :test ]
 
 gem "faker", require: false
