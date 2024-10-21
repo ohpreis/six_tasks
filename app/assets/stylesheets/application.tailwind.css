@@ -29,6 +29,10 @@
   /* Trix editor styles */
   trix-editor {
     @apply w-full;
+    
+  }
+  trix-editor {
+    @apply focus:outline-none focus:ring-0 focus:border-transparent focus:ring-transparent focus:ring-offset-transparent;
   }
   
   trix-editor h1 {
@@ -41,6 +45,10 @@
     font-size: 0.75rem !important;
     line-height: 0.75rem !important;
     @apply leading-5 font-semibold text-gray-500 mb-4;
+  }
+
+  .trix-button.trix-button--icon.trix-button--icon-attach {
+      display:none;
   }
   
   trix-editor a:not(.no-underline) {
