@@ -9,8 +9,4 @@ class Task < ApplicationRecord
   def set_default_status
     self.status ||= :backlog
   end
-
-  def self.chron_reset
-    Task.where(status: :doing).update_all(status: :backlog)
-  end
 end
