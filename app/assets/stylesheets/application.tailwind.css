@@ -47,9 +47,6 @@
     @apply leading-5 font-semibold text-gray-500 border-b border-blue-500 mb-4 block;
   }
 
-  .trix-button.trix-button--icon.trix-button--icon-attach {
-      display:none;
-  }
   
   trix-editor a:not(.no-underline) {
     @apply underline;

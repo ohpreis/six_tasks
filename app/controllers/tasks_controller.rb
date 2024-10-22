@@ -3,8 +3,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy change_status ]
 
   # GET /tasks or /tasks.json
+  # # Here for posperity sake, we will not be using this method
+  # # Instead we will be using the home controller to display the tasks
   def index
-    @tasks = Task.all.order(created_at: :desc)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -34,7 +35,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
 
-    status(@task)
+    prefered_status_on_creation(@task)
 
     respond_to do |format|
       if @task.save
@@ -47,7 +48,10 @@ class TasksController < ApplicationController
     end
   end
 
-  def status(task)
+  # This method is used to set the status of the task
+  # based on the last occurence of @doing or @idea in the title
+  # We allow users to pass in the status as a parameter in the title aka. @doing or @idea
+  def prefered_status_on_creation(task)
     pattern = /@doing|@idea/
     last_occurrence = @task.title.match(pattern).to_s
 

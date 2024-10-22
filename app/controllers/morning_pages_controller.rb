@@ -9,7 +9,6 @@ class MorningPagesController < ApplicationController
     ensure_morning_page_for_today
 
     # count the number of words in the morning page
-    # and store it in the instance variable @word_count
     @word_count = count_words(@morning_page.body)
   end
 
@@ -41,6 +40,7 @@ class MorningPagesController < ApplicationController
   end
 
   # POST /morning_pages or /morning_pages.json
+  # Here for posperity, not used in the app
   def create
     @morning_page = MorningPage.new(morning_page_params)
     @morning_page.user = current_user
@@ -101,7 +101,7 @@ class MorningPagesController < ApplicationController
 
       # If no morning page is found, create a new one
       unless @morning_page
-        @morning_page = MorningPage.create!(created_at: current_user_time_zone.now, user: current_user, body: "")
+        @morning_page = MorningPage.create!(created_at: current_user_time_zone.now, user: current_user, body: "a clean slate")
       end
     end
 
