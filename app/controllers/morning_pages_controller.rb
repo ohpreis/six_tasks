@@ -3,18 +3,11 @@ class MorningPagesController < ApplicationController
   before_action :set_morning_page, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token
 
+
   # GET /morning_pages or /morning_pages.json
   def index
-    # Define the time range for today
-    today_range = Date.today.midnight..Date.today.end_of_day
+    ensure_morning_page_for_today
 
-    # Find the morning page for the current user within the time range
-    @morning_page = MorningPage.where(created_at: today_range, user: current_user).first
-
-    # If no morning page is found, create a new one
-    unless @morning_page
-      @morning_page = MorningPage.create!(created_at: Date.today, user: current_user, body: "")
-    end
     # count the number of words in the morning page
     # and store it in the instance variable @word_count
     @word_count = count_words(@morning_page.body)
@@ -97,5 +90,23 @@ class MorningPagesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def morning_page_params
       params.require(:morning_page).permit(:body, :user_id)
+    end
+
+    # Helper method to ensure a morning page exists for the current user and day
+    def ensure_morning_page_for_today
+      today_range = current_user_time_zone.now.beginning_of_day..current_user_time_zone.now.end_of_day
+
+      # Find the morning page for the current user within the time range
+      @morning_page = MorningPage.where(created_at: today_range, user: current_user).first
+
+      # If no morning page is found, create a new one
+      unless @morning_page
+        @morning_page = MorningPage.create!(created_at: current_user_time_zone.now, user: current_user, body: "")
+      end
+    end
+
+    # Helper method to get the current user's time zone
+    def current_user_time_zone
+      Time.use_zone(current_user.time_zone) { Time.zone }
     end
 end

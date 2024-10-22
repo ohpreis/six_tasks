@@ -38,13 +38,13 @@
   trix-editor h1 {
     font-size: 1.25rem !important;
     line-height: 1.25rem !important;
-    @apply leading-5 font-semibold mb-4;
+    @apply leading-5 font-semibold pb-1 mb-4;
   }
 
-  trix-editor .small-text {
+  trix-editor timestamp {
     font-size: 0.75rem !important;
     line-height: 0.75rem !important;
-    @apply leading-5 font-semibold text-gray-500 mb-4;
+    @apply leading-5 font-semibold text-gray-500 border-b border-blue-500 mb-4 block;
   }
 
   .trix-button.trix-button--icon.trix-button--icon-attach {
@@ -90,3 +90,4 @@
   }
 
 }
+@import 'actiontext.css';

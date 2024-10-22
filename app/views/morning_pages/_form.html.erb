@@ -15,14 +15,14 @@
     <input type="hidden" name="url" id="autosave-url" value="<%= morning_page_path(morning_page) %>">
   </div>
 
-  <div data-controller="autosave word-count trix-timestamp"
+  <div data-controller="autosave word-count"
     data-autosave-url="<%= morning_page_path(morning_page) %>">
 
     <%= form.rich_text_area :body, 
       data: { 
         autosave_target: "editor",
         word_count_target: "editor",
-        trix_timestamp_target: "editor",
+        trix_ts_plugin_target: "editor",
         action: "trix-change->autosave#save trix-change->word-count#updateWordCount",
       },
       class: "p-2.5 w-full h-[calc(100vh-174px)] overflow-auto text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 ", 
