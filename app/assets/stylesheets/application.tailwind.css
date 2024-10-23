@@ -26,6 +26,11 @@
       display: block;
   }
 
+  /* Task Radio Buttons */
+  input[type="radio"]:checked + span {
+    display: block;
+  }
+
   /* Trix editor styles */
   trix-editor {
     @apply w-full;

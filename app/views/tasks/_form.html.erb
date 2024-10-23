@@ -1,63 +1,60 @@
-<%= form_with(model: task) do |form| %>
-  
-  <%# Display error messages %>
-  <% if task.errors.any? %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" 
-         role="alert" 
-         data-controller="alert" 
-         data-alert-target="alert">
-      <h5 class="font-bold mb-2">
-        <%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:
-      </h5>
-      <ul class="list-disc list-inside">
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+<%= form_with model: @task, remote: true, class: "flex-1 flex flex-col", html: { data: { controller: "savetask" } } do |f| %>
+  <!-- Placeholder for the error message -->
+  <div class="my-4 p-2 bg-red-300" data-savetask-target="error" style="display: none;">
+    An error occurred while saving. Please try again.
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 py-2 flex flex-col h-full">
+    <%= f.text_area :title, 
+      data: { action: "input->savetask#debouncedSave", savetask_target: "content" }, 
+      class: "flex-1 w-full resize-none border rounded p-2" 
+    %>
+  </div>
+
+  <!-- Footer (Sticky with 2 Rows) -->
+  <footer class="bg-gray-100 py-2 w-full">
+    <div class="flex flex-col md:flex-row gap-4 mb-4 bg-blue-100 p-4">
+      <div class="w-full md:w-3/4 rounded md:text-sm">
+        <div class="grid sm:grid-cols-4 gap-3">
+          <% Task.statuses.each do |key, value| %>
+            <% id = "task_status_#{key}" %>
+            <label for="<%= id %>" class="relative flex flex-col bg-white p-4 pb-1 rounded-lg shadow-md cursor-pointer">
+              <span class="font-semibold text-gray-500 leading-tight uppercase mb-3"><%= key.humanize %></span>
+              <%= f.radio_button :status, key, id: id, 
+                data: { action: "savetask#save", savetask_target: "status" }, 
+                class: "absolute h-0 w-0 appearance-none sr-only" 
+              %>
+              <span aria-hidden="true" class="hidden absolute inset-0 border-2 border-green-500 bg-green-200 bg-opacity-10 rounded-lg">
+                <span class="absolute top-3 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-green-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-green-600">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </span>
+            </label>
         <% end %>
-      </ul>
-      <span class="absolute top-0 bottom-0 right-0 px-4 py-3" 
-            data-action="click->alert#closeAlert">
-        <svg class="fill-current h-6 w-6 text-red-500" 
-             role="button" 
-             xmlns="http://www.w3.org/2000/svg" 
-             viewBox="0 0 20 20">
-          <title>Close</title>
-          <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
-        </svg>
-      </span>
-    </div>
-  <% end %>
-
-  <div data-controller="autosave"
-       data-autosave-url="<%= task_path(task) %>">
-    <%= form.text_area :title,
-          data: { target: "autosave.editor", action: "input->autosave#save" },
-          id: "editor",
-          class: "p-2.5 w-full h-[calc(100vh-194px)] overflow-auto text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500", 
-          placeholder: "Write your thoughts here..." %>
-  </div>
-  <div class="col-span-1">
-    <span id="autosave-status" class="text-gray-500"></span>
-  </div>
-  <!-- Sticky Footer Section -->
-  <div class="fixed bottom-0 xs:left-0 w-full bg-white border-t border-gray-300 pb-8">
-    <div class="flex flex-col lg:flex-row lg:space-x-4 py-4">
-      <% Task.statuses.each do |key, value| %>
-        <% id = "task_status_#{key}" %>
-        <div class="flex items-center border rounded px-4 py-2 mb-2 lg:mb-0">
-          <%= form.radio_button :status, key, id: id, class: "form-radio text-blue-600" %>
-          <%= form.label :status, key.humanize, for: id, class: "ml-2 text-gray-700" %>
         </div>
-      <% end %>
+
+      </div>
+
+      <div class="w-full md:w-1/4 p-4 rounded">
+        <div id="autosave-status" class="text-gray-500 transition-opacity duration-1000">&nbsp;</div>
+      </div>
     </div>
 
-    <div>
-      <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %> 
-      <%= link_to "Delete", task_path(task), data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      }, 
-      class: "ms-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-      <%= link_to "Back to tasks", root_path, class: "ms-4 text-base font-bold text-blue-600 mb-1 hover:text-gray-900" %>
+    <div class="flex ">
+      <div class="w-1/2 py-4">
+        <%= link_to "Delete", task_path(task), 
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %> 
+      </div>
+      
+      <div class="w-1/2 pt-4 text-end">
+        <%= link_to "Back to tasks", root_path, 
+          class: "ms-4 text-base font-bold text-blue-600 hover:text-gray-900" %>
+      </div>
     </div>
-  </div>
+    
+  </footer>
 <% end %>
