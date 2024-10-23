@@ -1,45 +1,33 @@
-
-<%= form_with(model: morning_page, html: { class: "lg:w-3/4" }) do |form| %>
-
-  <% if morning_page.errors.any? %>
-    <div style="color: red">
-      <ul>
-        <% morning_page.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <input type="hidden" name="url" id="autosave-url" value="<%= morning_page_path(morning_page) %>">
+<%= form_with model: @morning_page, remote: true, class: "flex-1 flex flex-col", html: { data: { controller: "savepage" } } do |f| %>
+  <!-- Placeholder for the error message -->
+  <div class="my-4 p-2 bg-red-300" data-savepage-target="error" style="display: none;">
+    An error occurred while saving. Please try again.
   </div>
 
-  <div data-controller="autosave word-count"
-    data-autosave-url="<%= morning_page_path(morning_page) %>">
+  <!-- Main Content Area -->
+  <div class="flex-1 py-2 flex flex-col h-full">
+    <%= f.rich_text_area :body, 
+      data: { action: "input->savepage#debouncedSave", savetask_target: "content" }, 
+      class: "flex-1 w-full resize-none border rounded p-2" 
+    %>
+  </div>
 
-    <%= form.rich_text_area :body, 
-      data: { 
-        autosave_target: "editor",
-        word_count_target: "editor",
-        trix_ts_plugin_target: "editor",
-        action: "trix-change->autosave#save trix-change->word-count#updateWordCount",
-      },
-      class: "p-2.5 w-full h-[calc(100vh-174px)] overflow-auto text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-sky-500 focus:border-sky-500 ", 
-      placeholder: "Write your thoughts here..." %>
+  <!-- Footer (Sticky with 2 Rows) -->
+  <footer class="bg-gray-100 py-2 w-full">
     
-    <div class="grid grid-cols-4 gap-4 mt-4">
-      <div class="col-span-2">
-        <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white md:font-bold py-1 px-2 rounded cursor-pointer" %>  
-        <%= link_to "Archive", archive_morning_pages_path, class: "bg-gray-600 hover:bg-gray-700 text-white md:font-bold py-1 px-2 rounded cursor-pointer" %>
+    <div class="flex gap-4 p-2">
+      <div class="w-full md:w-1/4 rounded mt-4 md:mt-1">
+        <%= link_to "Archive", archive_morning_pages_path, 
+          class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
-      <div class="col-span-1">
-        <span id="autosave-status" class="text-gray-500"></span>
+      <div class="w-full md:w-2/4 rounded">
+        <div id="autosave-status" class="text-gray-500 transition-opacity duration-1000">&nbsp;</div>
       </div>
-      <div class="col-span-1">
-        <span id="word-count" class="text-gray-700" data-word-count-target="wordCount">0 words</span>
+      <div class="w-full md:w-1/4 rounded text-end me-2">
+        <%= link_to "Back to tasks", root_path, 
+          class: "text-base font-bold text-blue-600 hover:text-gray-900" %>
       </div>
     </div>
-  </div>
-
+    
+  </footer>
 <% end %>
