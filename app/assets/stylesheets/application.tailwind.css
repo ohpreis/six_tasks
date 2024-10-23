@@ -33,17 +33,16 @@
 
   /* Trix editor styles */
   trix-editor {
-    @apply w-full;
-    
+    @apply w-full text-base md:text-mpages;    
   }
   trix-editor {
-    @apply focus:outline-none focus:ring-0 focus:border-transparent focus:ring-transparent focus:ring-offset-transparent;
+    @apply focus:outline-none focus:ring-0 focus:ring-offset-transparent;
   }
   
   trix-editor h1 {
-    font-size: 1.25rem !important;
-    line-height: 1.25rem !important;
-    @apply leading-5 font-semibold pb-1 mb-4;
+    /* font-size: 1.25rem !important;
+    line-height: 1.25rem !important; */
+    @apply text-3xl font-semibold pb-1 mb-4;
   }
 
   trix-editor timestamp {
@@ -76,7 +75,6 @@
     width: 100%;
     vertical-align: top;
     font-family: monospace;
-    font-size: 1.5em;
     padding: 0.5em;
     white-space: pre;
     background-color: #eee;
