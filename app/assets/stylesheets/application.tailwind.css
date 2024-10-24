@@ -32,7 +32,7 @@
   }
 
   /* Trix editor styles */
-  trix-editor {
+    trix-editor {
     @apply focus:outline-none focus:ring-0 focus:ring-offset-transparent text-base md:text-mpages;    
   }
   
