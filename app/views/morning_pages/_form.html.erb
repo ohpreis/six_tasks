@@ -1,7 +1,13 @@
 <div class="flex-1 flex flex-col overflow-hidden">
   <%= form_with model: @morning_page, remote: true, 
-        class: "flex-1 flex flex-col overflow-hidden", html: { data: { controller: "savepage" } } do |f| %>
-    <!-- Placeholder for the error message -->
+        class: "flex-1 flex flex-col overflow-hidden", html: { data: { controller: "savepage word-count" } } do |f| %>
+    
+    <!-- Span fixed to the bottom right corner, desktop only. Shows the wordcount -->
+    <span class="hidden lg:block fixed bottom-16 right-10 m-4 bg-lime-100 text-gray-500 py-2 px-4 rounded">
+      <span id="word-count" class="text-gray-700" data-word-count-target="wordCount"><%= @word_count %> words</span>
+    </span>
+
+        <!-- Placeholder for the error message -->
     <div class="my-4 p-2 bg-red-300" data-savepage-target="error" style="display: none;">
       An error occurred while saving. Please try again.
     </div>
@@ -10,7 +16,7 @@
     <div class="flex-1 p-4 overflow-hidden">
       <%= f.rich_text_area :body,
         class: "w-full h-full p-2 ", 
-        data: { action: "input->savepage#debouncedSave", savepage_target: "content" },
+        data: { action: "input->savepage#debouncedSave", savepage_target: "content", word_count_target: "content" },  
         style: "border: none; background-color: #FAF9F6;"
       %>
     </div>
