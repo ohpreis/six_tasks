@@ -9,6 +9,14 @@
                 </svg>
                 Home
             </a>
+            <% if current_user.present? %>
+                <%= link_to morning_pages_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 16v2m8-10h2m-18 0H2m15.364-7.364l1.414 1.414M4.222 19.778l1.414-1.414M19.778 19.778l-1.414-1.414M4.222 4.222l1.414 1.414M12 6a6 6 0 100 12 6 6 0 000-12z" />
+                    </svg>
+                    Morning Page
+                <% end %>
+            <% end %>
             <a href="#" class="text-gray-700 hover:text-gray-900 px-3 hidden md:flex ">
                 About
             </a>
@@ -16,18 +24,13 @@
 
         <div class="hidden md:flex space-x-4">
             <% if current_user.present? %>
-                <%= link_to morning_pages_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
+                
+                <%= link_to edit_user_registration_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6a4 4 0 110 8 4 4 0 010-8z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.953 9.953 0 0112 15c2.21 0 4.21.722 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    Morning Page
+                    Profile
                 <% end %>
-                    <%= link_to edit_user_registration_path, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.953 9.953 0 0112 15c2.21 0 4.21.722 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      Profile
-                    <% end %>
                 <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center text-gray-700 hover:text-gray-900 px-3" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

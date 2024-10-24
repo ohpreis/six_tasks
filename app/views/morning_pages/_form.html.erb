@@ -1,33 +1,41 @@
-<%= form_with model: @morning_page, remote: true, class: "flex-1 flex flex-col", html: { data: { controller: "savepage" } } do |f| %>
-  <!-- Placeholder for the error message -->
-  <div class="my-4 p-2 bg-red-300" data-savepage-target="error" style="display: none;">
-    An error occurred while saving. Please try again.
-  </div>
-
-  <!-- Main Content Area -->
-  <div class="flex-1 py-2 flex flex-col h-full">
-    <%= f.rich_text_area :body, 
-      data: { action: "input->savepage#debouncedSave", savetask_target: "content" }, 
-      class: "flex-1 w-full resize-none border rounded p-2" 
-    %>
-  </div>
-
-  <!-- Footer (Sticky with 2 Rows) -->
-  <footer class="bg-gray-100 py-2 w-full">
-    
-    <div class="flex gap-4 p-2">
-      <div class="w-full md:w-1/4 rounded mt-4 md:mt-1">
-        <%= link_to "Archive", archive_morning_pages_path, 
-          class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
-      </div>
-      <div class="w-full md:w-2/4 rounded">
-        <div id="autosave-status" class="text-gray-500 transition-opacity duration-1000">&nbsp;</div>
-      </div>
-      <div class="w-full md:w-1/4 rounded text-end me-2">
-        <%= link_to "Back to tasks", root_path, 
-          class: "text-base font-bold text-blue-600 hover:text-gray-900" %>
-      </div>
+<div class="flex-1 flex flex-col overflow-hidden">
+  <%= form_with model: @morning_page, remote: true, 
+        class: "flex-1 flex flex-col overflow-hidden", html: { data: { controller: "savepage" } } do |f| %>
+    <!-- Placeholder for the error message -->
+    <div class="my-4 p-2 bg-red-300" data-savepage-target="error" style="display: none;">
+      An error occurred while saving. Please try again.
     </div>
-    
-  </footer>
-<% end %>
+
+    <!-- Textarea (or Trix Editor) -->
+    <div class="flex-1 p-4 overflow-hidden">
+      <%= f.rich_text_area :body,
+        class: "w-full h-full p-2 ", 
+        data: { action: "input->savepage#debouncedSave", savepage_target: "content" },
+        style: "border: none; background-color: #FAF9F6;"
+      %>
+    </div>
+  <% end %>
+</div>
+
+    <!-- Footer (Sticky with 2 Rows) -->
+    <footer class="bg-gray-100 py-4 w-full">
+
+      <div class="flex ">
+        <div class="w-1/2 py-4">
+          <%= link_to "Archive", archive_morning_pages_path, 
+            class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
+        </div>
+
+        <div class="w-1/4 py-4">
+          <div id="autosave-status" class="text-gray-500 transition-opacity duration-1000">&nbsp;</div>
+        </div>
+        
+        <div class="w-1/4 pt-4 text-end">
+          <%= link_to "Back to tasks", root_path, 
+            class: "ms-4 text-base font-bold text-blue-600 hover:text-gray-900" %>
+        </div>
+      </div>
+      
+    </footer>
+  
+
